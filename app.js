@@ -5,56 +5,92 @@
 * Muestro un listado de usuarios y sus turnos por consola.
 */
 
-class Usuario {
+
+
+class Persona {
     constructor(nombre, edad, dni, turno) {
         this.nombre = nombre.toLowerCase();
         this.edad = parseInt(edad);
         this.dni = parseInt(dni);
-        this.turno = new Date(turno);
+        this.turno = [];
+    }
+    mostrar_turnos() {
+        return (`Turnos reservados de ${this.nombre} - ${this.dni}: \n${this.turno}`)
+    }
+
+    set_turno(nuevo_turno) {
+        this.turno = turno.push(nuevo_turno);
     }
 }
 
-let bienvenido = confirm("Bienvenido a sistema de turnos. Desea comenzar?")
-const usuarios = [];
 
-//invalidDate() elimina el ultimo dato de usuario ingresado incorrectamente, y finaliza el programa.
+
+
+let bienvenido = confirm("Bienvenido a sistema de turnos. Desea comenzar?")
+const personas = [];
+const turno = [];
+
+//invalidDate() elimina el ultimo dato de usuario ingresado incorrectamente.
 function invalidDate() {
-    usuarios.pop();
+    personas.pop();
     bienvenido = false;
-    console.log(usuarios);
+    console.log(personas);
 }
 
+
+
+function solicitar_datos_turno() {
+    let flag = true;
+    while (flag) {
+
+        let msj = "";
+        let turno_ingresado = prompt("Ingrese dia y horario para su turno. ");
+
+        //validaciones de input
+        if (!turno_ingresado) {
+            msj += "\nDebe ingresar un turno valido";
+
+        } else {
+            alert("Turno reservado con exito");            
+            flag = false;
+            turno.push(turno_ingresado);  
+                 
+        }
+    }
+    
+}
+
+
+
 while (bienvenido) {
-//solicito datos al usuario
-    usuarios.push(new Usuario(
+    //solicito datos al usuario
+    personas.push(new Persona(
         prompt("Ingrese su nombre"),
         prompt("Ingrese su edad"),
-        prompt("Ingrese su dni"),
-        prompt("Ingrese turno deseado. \nFormato:  mes/dia/año  hora:minutos.")
+        prompt("Ingrese su dni")
+
     ));
 
+    solicitar_datos_turno()
 
-//valido inputs, si ALGUNO falla llamo a la funcion invalidDate()
-    if (usuarios.some((user)=> (isNaN(user.edad)))) {
+    //valido inputs, si ALGUNO falla llamo a la funcion invalidDate()
+    if (personas.some((user) => (isNaN(user.edad)))) {
         alert("Usted a ingresado una EDAD inválida. Reintente.");
         invalidDate()
 
-    } else if (usuarios.some((user)=> (isNaN(user.dni)))) {
+    } else if (personas.some((user) => (isNaN(user.dni)))) {
         alert("Usted a ingresado un DNI inválido. Reintente.");
         invalidDate()
 
-    } else if (usuarios.some((user)=> (isNaN(Date.parse(user.turno)))) ) {
-    // } else if (isNaN(Date.parse(usuarios[0].turno))) {
-        alert("Usted a ingresado una fecha inválida. \nFormato:  mes/dia/año  hora:minutos.");
-        invalidDate()
 
     } else {
-        bienvenido = confirm("Turno reservado con éxito. \nDesea reservar otro turno?")
+        bienvenido = confirm("Desea reservar otro turno?")
+
     }
 
 }
 
-usuarios.forEach((user) => console.log(user));
+personas.forEach((user) => console.log(user));
 
 
 
@@ -98,3 +134,7 @@ usuarios.forEach((user) => console.log(user));
 }
  */
 
+/*
+   } else if (personas.some((user) => (isNaN(Date.parse(user.turno))))) {
+       alert("Usted a ingresado una fecha inválida. \nFormato:  mes/dia/año  hora:minutos.");
+           invalidDate() */
