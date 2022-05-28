@@ -16,22 +16,17 @@ class Persona {
     }
 
     solicitar_datos_turno() {
-        let flag = true;
-        while (flag) {
 
-            let msj = "";
-            let turno_ingresado = prompt("Ingrese dia y horario para su turno. ");
+        let turno_ingresado = prompt("Ingrese dia y horario para su turno. ");
+        let msj = "";
 
-            //validaciones de input
-            if (!turno_ingresado) {
-                msj += "\nDebe ingresar un turno valido";
+        if (!turno_ingresado) {
+            msj += "\nDebe ingresar un turno valido";
 
-            } else {
-                alert("Turno reservado con exito");
-                flag = false;
-                turno_agenda.push(turno_ingresado);
-                this.turno.push(turno_ingresado);
-            }
+        } else {
+            alert("Turno reservado con exito");
+            turno_agenda.push(turno_ingresado);
+            this.turno.push(turno_ingresado);
         }
     }
 }
@@ -50,12 +45,9 @@ function invalidDate() {
 
 
 while (bienvenido) {
-    //solicito datos al usuario
-    personas.push(new Persona(
-        prompt("Ingrese su nombre"),
-        prompt("Ingrese su edad"),
-        prompt("Ingrese su dni")
-    ));
+    personas.push(new Persona
+        (prompt("Ingrese su nombre"), prompt("Ingrese su edad"), prompt("Ingrese su dni")
+        ));
 
     personas[personas.length - 1].solicitar_datos_turno()
     // turno.push(turno_ingresado);
