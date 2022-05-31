@@ -4,6 +4,9 @@
 * Muestro un listado de usuarios y sus turnos por consola al finalizar.
 */
 
+
+
+
 class Persona {
     constructor(nombre, edad, dni, turno) {
         this.nombre = nombre.toLowerCase();
@@ -59,7 +62,6 @@ while (bienvenido) {
     }
 }
 
-
 //invalidData() elimina el ultimo dato de usuario ingresado incorrectamente.
 function invalidData() {
     personas.pop();
@@ -67,12 +69,23 @@ function invalidData() {
     console.log(personas);
 }
 
+//DOM
+ 
+let titulo = document.createElement("p");            
+titulo.innerHTML = "<h2>Listado informativo de usuarios y turnos </h2>";           
+document.body.append(titulo);  
 
-//muestro informacion de los usuarios por consola 
-personas.forEach((user) => console.log(user));
 
-//mustro informacion de las fechas de los turnos tomados por consola
-turno_agenda.forEach((turno) => console.log(turno));
+// muestro informacion de los usuarios creando elementos en el DOM
+for (const usuario of personas) {
+    let div = document.createElement("div");
+    div.innerHTML = `<h2>Nombre: ${usuario.nombre}</h2>
+                     <p>Edad: ${usuario.edad} / Dni: ${usuario.dni} /Turno: ${usuario.turno}</p>
+                     <hr>`;
+    document.body.appendChild(div);
+}
+
+
 
 
 
