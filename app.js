@@ -94,7 +94,6 @@ ulTurnos.innerHTML = inner;
 document.body.appendChild(ulTurnos)})
 
 
-
 console.log("hola")
 
 
