@@ -6,7 +6,6 @@
 
 
 
-
 class Persona {
     constructor(nombre, edad, dni, turno) {
         this.nombre = nombre.toLowerCase();
@@ -68,24 +67,31 @@ function invalidData() {
     bienvenido = false;
     console.log(personas);
 }
+  
 
-//DOM
- 
 let titulo = document.createElement("p");            
 titulo.innerHTML = "<h2>Listado informativo de usuarios y turnos </h2>";           
-document.body.append(titulo);  
+document.body.append(titulo);    
+
 
 
 // muestro informacion de los usuarios creando elementos en el DOM
 for (const usuario of personas) {
     let div = document.createElement("div");
-    div.innerHTML = `<h2>Nombre: ${usuario.nombre}</h2>
-                     <p>Edad: ${usuario.edad} / Dni: ${usuario.dni} /Turno: ${usuario.turno}</p>
+    div.innerHTML = `<h2>${usuario.nombre}</h2>
+                     <p>${usuario.edad} / ${usuario.dni} / ${usuario.turno}</p>
                      <hr>`;
     document.body.appendChild(div);
 }
 
+//mustro informacion de las fechas de los turnos en agenda
+let ulTurnos = document.createElement("ul");
+let inner = '';
+turno_agenda.forEach((turno) => {
+    inner+= `<li>${turno}</li>`;
 
+ulTurnos.innerHTML = inner;
+document.body.appendChild(ulTurnos)})
 
 
 
