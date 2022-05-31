@@ -11,17 +11,18 @@ class Persona {
         this.dni = parseInt(dni);
         this.turno = [];
     }
-    mostrar_turnos() {
-        return (`Turnos reservados de ${this.nombre} - ${this.dni}: \n${this.turno}`)
-    }
-
+  
     solicitar_datos_turno() {
 
-        let turno_ingresado = prompt("Ingrese dia y horario para su turno. ");
+        let turno_ingresado = new Date(prompt("Ingrese dia y horario para su turno. \nFormato:  mes/dia/año  hora:minutos "));
         let msj = "";
 
         if (!turno_ingresado) {
             msj += "\nDebe ingresar un turno valido";
+        } else if  (isNaN(Date.parse(turno_ingresado))) {
+
+            alert("Usted a ingresado una fecha inválida. \nFormato:  mes/dia/año  hora:minutos.");
+            personas.pop();            
 
         } else {
             alert("Turno reservado con exito");
@@ -36,13 +37,6 @@ let bienvenido = confirm("Bienvenido a sistema de turnos. Desea comenzar?")
 const personas = [];
 const turno_agenda = [];
 
-//invalidDate() elimina el ultimo dato de usuario ingresado incorrectamente.
-function invalidDate() {
-    personas.pop();
-    bienvenido = false;
-    console.log(personas);
-}
-
 
 while (bienvenido) {
     personas.push(new Persona
@@ -50,24 +44,35 @@ while (bienvenido) {
         ));
 
     personas[personas.length - 1].solicitar_datos_turno()
-    // turno.push(turno_ingresado);
-
-    //valido inputs, si ALGUNO falla llamo a la funcion invalidDate()
+        
+    //valido inputs, si ALGUNO falla llamo a la funcion invalidData()
     if (personas.some((user) => (isNaN(user.edad)))) {
         alert("Usted a ingresado una EDAD inválida. Reintente.");
-        invalidDate()
+        invalidData()
 
     } else if (personas.some((user) => (isNaN(user.dni)))) {
         alert("Usted a ingresado un DNI inválido. Reintente.");
-        invalidDate()
+        invalidData()
 
     } else {
         bienvenido = confirm("Desea reservar otro turno?")
     }
 }
 
+
+//invalidData() elimina el ultimo dato de usuario ingresado incorrectamente.
+function invalidData() {
+    personas.pop();
+    bienvenido = false;
+    console.log(personas);
+}
+
+
+//muestro informacion de los usuarios por consola 
 personas.forEach((user) => console.log(user));
 
+//mustro informacion de las fechas de los turnos tomados por consola
+turno_agenda.forEach((turno) => console.log(turno));
 
 
 
