@@ -7,8 +7,10 @@
 
 
 class Persona {
-    constructor(nombre, edad, dni, turno) {
-        this.nombre = nombre.toLowerCase();
+    constructor(nombre, apellido, email, edad, dni, turno) {
+        this.nombre = nombre
+        this.apellido = apellido
+        this.email = email.toLowerCase();
         this.edad = parseInt(edad);
         this.dni = parseInt(dni);
         this.turno = [];
@@ -42,7 +44,7 @@ const turno_agenda = [];
 
 while (bienvenido) {
     personas.push(new Persona
-        (prompt("Ingrese su nombre"), prompt("Ingrese su edad"), prompt("Ingrese su dni")
+        (prompt("Ingrese su nombre"), prompt("Ingrese su apellido"), prompt("Ingrese su email"), prompt("Ingrese su edad"), prompt("Ingrese su dni")
         ));
 
     personas[personas.length - 1].solicitar_datos_turno()
@@ -78,8 +80,8 @@ document.body.append(titulo);
 // muestro informacion de los usuarios creando elementos en el DOM
 for (const usuario of personas) {
     let div = document.createElement("div");
-    div.innerHTML = `<h2>${usuario.nombre}</h2>
-                     <p>${usuario.edad} / ${usuario.dni} / ${usuario.turno}</p>
+    div.innerHTML = `<h2>${usuario.nombre} ${usuario.apellido} - Email: ${usuario.email}</h2>
+                     <p> Edad: ${usuario.edad} / Dni: ${usuario.dni} / Turno: ${usuario.turno}</p>
                      <hr>`;
     document.body.appendChild(div);
 }
@@ -94,7 +96,7 @@ ulTurnos.innerHTML = inner;
 document.body.appendChild(ulTurnos)})
 
 
-console.log("hola")
+
 
 
 
